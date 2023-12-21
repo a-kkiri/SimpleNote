@@ -1,6 +1,6 @@
 # README
 
-SimpleNote 是为编写简易课程笔记创建的 Typst 模板，修改自 [jsk-lecnotes]("https://github.com/jskherman/jsk-lecnotes")
+SimpleNote 是为编写简易课程笔记创建的 Typst 模板，修改自 [jsk-lecnotes](https://github.com/jskherman/jsk-lecnotes)
 
 ## 模板下载
 
