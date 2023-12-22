@@ -9,6 +9,7 @@
 #import "@preview/codelst:1.0.0": sourcecode, codelst
 #import "@preview/showybox:2.0.1": showybox
 #import "@preview/ctheorems:1.0.0": *
+#import "notes.typ": note, notes
 
 #let template(
   // 笔记标题
@@ -113,7 +114,7 @@
       let elems = query(
         heading.where(level: 1).before(footers.first().location()), footers.first().location()
       )
-
+      if elems == () {return}
       let head_title = text(fill: accent_color)[
         #if short_title != none { short_title } else { title }
       ]
@@ -132,11 +133,22 @@
     footer: locate(loc => {
       if loc.page() == 1 {return}
       [
-      #if calc.even(loc.page()) == true {
-        align(left)[#counter(page).display("1 / 1",both: true,)]
-      }else{
-        align(right)[#counter(page).display("1 / 1",both: true,)]
-      }
+        #if calc.even(loc.page()) == true {
+          box(width: 15%, height: 100%)[
+            #align(left)[#counter(page).display("1 / 1",both: true,)]
+          ]
+          box(width: 85%, height: 100%)[
+            #notes()
+          ]
+        }else{
+          box(width: 85%, height: 100%)[
+            #notes()
+          ]
+          box(width: 15%, height: 100%)[
+            #align(right)[#counter(page).display("1 / 1",both: true,)]
+          ]
+        }
+      
       #label("__footer__")
       ]
     })
@@ -212,99 +224,81 @@
   show: codelst(reversed: true)
 
   //------------------------------------------------------------------
-
-  v(175pt)
-  // 显示论文的标题和描述。
-  align(right, [
-    #set text(36pt, weight: "bold")
-    #title
-    ])
-  if description != none {
-    align(right, box(width: 90%)[
-      #set text(size: 16pt, style: "italic")
-      #description
-    ])
-  }
-  v(18pt, weak: true)
-
-  // 作者和所属机构
-  align(right)[
-    #if authors.len() > 0 {
-      box(inset: (y: 10pt), {
-        authors.map(author => {
-          text(16pt, weight: "semibold")[
-            #if "homepage" in author {
-              [#link(author.homepage)[#author.name]]
-            } else { author.name }]
-          if "affiliations" in author {
-            super(author.affiliations)
-          }
-          if "github" in author {
-            link(author.github, box(height: 1.1em, baseline: 13.5%)[#image.decode(githubSvg)])
-          }
-        }).join(", ", last: {
-          if authors.len() > 2 {
-            ", and"
-          } else {
-            " and"
-          }
-        })
-      })
-    }
-    #v(-2pt, weak: true)
-    #if affiliations.len() > 0 {
-      box(inset: (bottom: 10pt), {
-        affiliations.map(affiliation => {
-          text(12pt)[
-            #super(affiliation.id)#h(1pt)#affiliation.name
-          ]
-        }).join(", ")
-      })
-    }
+  box(width: 100%, height: 40%)[
+    // 显示论文的标题和描述。
+    #align(right+bottom)[
+      #text(36pt, weight: "bold")[#title]
+      #parbreak()
+      #if description != none {
+        text(size: 16pt, style: "italic")[#description]
+      }
+    ]
   ]
 
-  v(300pt, weak: true)
+  box(width: 100%, height: 50%)[
+    #align(right+top)[
+      #if authors.len() > 0 {
+        box(inset: (y: 10pt), {
+          authors.map(author => {
+            text(16pt, weight: "semibold")[
+              #if "homepage" in author {
+                [#link(author.homepage)[#author.name]]
+              } else { author.name }]
+            if "affiliations" in author {
+              super(author.affiliations)
+            }
+            if "github" in author {
+              link(author.github, box(height: 1.1em, baseline: 13.5%)[#image.decode(githubSvg)])
+            }
+          }).join(", ", last: {
+            if authors.len() > 2 {
+              ", and"
+            } else {
+              " and"
+            }
+          })
+        })
+      }
+      #v(-2pt, weak: true)
+      #if affiliations.len() > 0 {
+        box(inset: (bottom: 10pt), {
+          affiliations.map(affiliation => {
+            text(12pt)[
+              #super(affiliation.id)#h(1pt)#affiliation.name
+            ]
+          }).join(", ")
+        })
+      }
+    ]
+  ]
 
-  // 显示笔记的最后更新日期。
-  if date != none {
-  align(left, table(
-    columns: (auto),
-    stroke: none,
-    gutter: 0pt,
-    align: (right, left),
-    [
-      #text(size: 12pt, "最初写作于")
-      #text(
+  box(width: 100%)[
+    #if date != none {
+      text(size: 12pt, "最初写作于：")
+      text(
         size: 12pt,
         fill: accent_color,
         weight: "semibold",
         date.display("[month repr:long] [day padding:zero], [year repr:full]")
       )
-    ],
-    [
-      #text(size: 12pt, "最后更新于")
-      #text(
+      parbreak()
+      text(size: 12pt, "最后更新于：")
+      text(
         size: 12pt,
         fill: accent_color,
         weight: "semibold",
         datetime.today().display("[month repr:long] [day padding:zero], [year repr:full]")
       )
-    ]
-  ))
-  } else {
-    align(center,
-    text(size: 11pt)[Last updated:#h(5pt)] + text(
-      size: 11pt,
-      fill: accent_color,
-      weight: "semibold",
-      datetime.today().display(
-        "[month repr:long] [day padding:zero], [year repr:full]"
+    } else {
+      text(size: 11pt)[最后更新于：#h(5pt)] + text(
+        size: 11pt,
+        fill: accent_color,
+        weight: "semibold",
+        datetime.today().display("[month repr:long] [day padding:zero], [year repr:full]")
       )
-    )
-    )
-  }
-  v(18pt, weak: true)
-
+    }
+  ]
+  
   pagebreak()
 
   show outline.entry: it => {
