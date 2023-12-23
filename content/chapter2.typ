@@ -42,7 +42,10 @@ int main() {
 
 == 公式
 
-  $ e^(i x) = cos x + i sin x $ <schrodinger>
+使用 `#mi('LaTeX equation')` 编写行内公式 #mi(`e^{ix} = \cos x + i \sin x`)
+
+使用 `#mitex('LaTeX equation')` 编写行间公式：#mitex(`e^{ix} = cos x + i sin x`)
+
 
 == 定理环境
 

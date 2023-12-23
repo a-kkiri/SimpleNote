@@ -10,6 +10,7 @@
 #import "@preview/showybox:2.0.1": showybox
 #import "@preview/ctheorems:1.0.0": *
 #import "notes.typ": note, notes
+#import "@preview/mitex:0.1.0": *
 
 #let template(
   // 笔记标题
