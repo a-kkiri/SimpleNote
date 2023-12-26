@@ -9,8 +9,8 @@
 #enum(
   [*突出*],
   [_强调_],
-  [引用 @netwok2020],
-  [脚注 #note[脚注例]],
+  [引用 @figure],
+  [脚注（暂时移除）],
 )
 
 == 代码
@@ -26,7 +26,7 @@ int main() {
 ```
 )] <cpp-example>
 
-== 图片
+== 图片 <figure>
 
 #figure(caption: [图片插入例], image("../figures/typst.png")) <image-example>
 
@@ -54,49 +54,49 @@ int main() {
   "定义",
   footer: "定义"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #example(
   "示例",
   footer: "示例"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #tip(
   "提示",
   footer: "提示"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #attention(
   "注意",
   footer: "注意"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #quote(
   "引用",
   footer: "引用"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #theorem(
   "定理",
   footer: "定理"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #proposition(
   "命题",
   footer: "命题"
 )[
-  #lorem(30)
+  #lorem(25)
 ]
 
 #sectionline

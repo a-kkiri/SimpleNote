@@ -1,16 +1,15 @@
+#import "@preview/whalogen:0.1.0": ce
+#import "@preview/codelst:1.0.0": sourcecode, codelst
+#import "@preview/showybox:2.0.1": showybox
+#import "@preview/ctheorems:1.0.0": *
+#import "@preview/mitex:0.1.0": *
+
 /*
   本模板修改自 jsk-lecnotes
     + 添加中文环境
     + 修改封面布局
     + 添加必要字体
 */
-
-#import "@preview/whalogen:0.1.0": ce
-#import "@preview/codelst:1.0.0": sourcecode, codelst
-#import "@preview/showybox:2.0.1": showybox
-#import "@preview/ctheorems:1.0.0": *
-#import "notes.typ": note, notes
-#import "@preview/mitex:0.1.0": *
 
 #let template(
   // 笔记标题
@@ -65,18 +64,18 @@
 
 ) = {
 
+  let accent_color = rgb(accent)
+
   // 使用 ctheorems 包
   show: thmrules
 
   // 中文粗体，斜体
-  show strong: set text(font: (text_font, sc_font))
+  show strong: set text(fill: accent_color.lighten(20%), font: (text_font, sc_font))
   show emph: text.with(font: (text_font, sc_font))
   // set text(cjk-latin-spacing: auto)
 
   // Github Logo
   let githubSvg = ```<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>```.text
-
-  let accent_color = rgb(accent)
 
   // 设置文档元数据
   set document(title: title, author: authors.map(author => author.name))
@@ -106,7 +105,7 @@
     numbering: "1 / 1",
     number-align: center,
     // 页边距
-    margin: auto,
+    margin: (x:1.6cm, y:2.3cm),
 
     header: locate(loc => {
       if loc.page() == 1{return}
@@ -116,7 +115,7 @@
         heading.where(level: 1).before(footers.first().location()), footers.first().location()
       )
       if elems == () {return}
-      let head_title = text(fill: accent_color)[
+      let head_title = text()[
         #if short_title != none { short_title } else { title }
       ]
       
@@ -127,7 +126,7 @@
       }
       
       v(-7pt)
-      align(center)[#line(length: 105%, stroke: (thickness: 1pt, paint: accent_color, dash: "solid"))]
+      align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
       
     }),
 
@@ -139,11 +138,11 @@
             #align(left)[#counter(page).display("1 / 1",both: true,)]
           ]
           box(width: 85%, height: 100%)[
-            #notes()
+            //#notes()
           ]
         }else{
           box(width: 85%, height: 100%)[
-            #notes()
+            //#notes()
           ]
           box(width: 15%, height: 100%)[
             #align(right)[#counter(page).display("1 / 1",both: true,)]
@@ -156,8 +155,17 @@
   )
 
   // 配置列表
-  set enum(tight:false, indent: 2em, body-indent: 6pt)
-  set list(tight:false, indent: 2em, body-indent: 6pt)
+  show list: it => [
+    #set list(tight: false, indent: 2em)
+    #set text(top-edge: "ascender")
+    #it
+  ]
+
+  show enum: it => [
+    #set enum(tight: false, indent: 2em)
+    #set text(top-edge: "ascender")
+    #it
+  ]
 
   // 章节计数器
   let chaptercounter = counter("chapter")
@@ -181,6 +189,7 @@
   ): it => box(width: 100%)[
     #set align(left)
     #set heading(numbering: "章节 1. ")
+    #set text(fill: accent_color)
     #it
     #v(-8pt)
     #line(length:100%, stroke: gray)
@@ -302,10 +311,6 @@
   
   pagebreak()
 
-  show outline.entry: it => {
-    text(fill: accent_color)[#it]
-  }
-
   // 显示笔记的目录
   outline(indent: auto)
 
@@ -313,7 +318,7 @@
   v(24pt, weak: true)
 
   // 将段落设置为两端对齐，并设置换行。
-  set par(justify: true, linebreaks: "optimized", leading: 0.8em)
+  set par(justify: true, linebreaks: "optimized", first-line-indent:2em, leading: 0.8em)
 
   pagebreak()
 
