@@ -98,6 +98,10 @@
     }
   }
 
+  // 计数器
+  let chaptercounter = counter("chapter")
+  let footnotecounter = counter(footnote)
+
   // 配置页面
   set page(
     paper: paper_size,
@@ -134,21 +138,11 @@
       if loc.page() == 1 {return}
       [
         #if calc.even(loc.page()) == true {
-          box(width: 15%, height: 100%)[
-            #align(left)[#counter(page).display("1 / 1",both: true,)]
-          ]
-          box(width: 85%, height: 100%)[
-            //#notes()
-          ]
+            align(left)[#counter(page).display("1 / 1",both: true,)]
         }else{
-          box(width: 85%, height: 100%)[
-            //#notes()
-          ]
-          box(width: 15%, height: 100%)[
-            #align(right)[#counter(page).display("1 / 1",both: true,)]
-          ]
+            align(right)[#counter(page).display("1 / 1",both: true,)]
         }
-      
+      #footnotecounter.update(())
       #label("__footer__")
       ]
     })
@@ -166,9 +160,6 @@
     #set text(top-edge: "ascender")
     #it
   ]
-
-  // 章节计数器
-  let chaptercounter = counter("chapter")
 
   // 配置标题
   set heading(numbering: "1.1.1.1.1.")
