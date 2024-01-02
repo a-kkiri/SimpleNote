@@ -1,8 +1,7 @@
-#import "@preview/whalogen:0.1.0": ce
-#import "@preview/codelst:1.0.0": sourcecode, codelst
+#import "@preview/codelst:2.0.0": sourcecode, codelst
 #import "@preview/showybox:2.0.1": showybox
-#import "@preview/ctheorems:1.0.0": *
-#import "@preview/mitex:0.1.0": *
+#import "@preview/ctheorems:1.1.0": *
+#import "@preview/mitex:0.2.0": *
 #import "resource.typ": *
 
 /*
@@ -180,9 +179,8 @@
     #set heading(numbering: "章节 1. ")
     #set text(fill: accent_color)
     #it
-    #v(-8pt)
+    #v(-12pt)
     #line(length:100%, stroke: gray)
-    #v(8pt)
   ]
 
   // 配置公式的编号和间距
@@ -387,9 +385,8 @@
 
 #let definition = thmenv(
   "definition",
-  "Definition",
-  boxcounting,
-  none,
+  boxcounting, //base counter name
+  2, // number of base number levels to use
   (name, number, body) => {
     notebox(name, number, body, "定义", _def, orange)
   }
@@ -397,9 +394,8 @@
 
 #let example = thmenv(
   "example",
-  "Example",
   boxcounting,
-  none,
+  2,
   (name, number, body, ..args) => {
     notebox(name, number, body, "示例", e_g_, blue)
   }
@@ -407,9 +403,8 @@
 
 #let tip = thmenv(
   "tip",
-  "Tip",
   boxcounting,
-  none,
+  2,
   (name, number, body) => {
     notebox(name, number, body, "提示", lightbulb, olive)
   }
@@ -417,9 +412,8 @@
 
 #let attention = thmenv(
   "attention",
-  "Attention",
   boxcounting,
-  none,
+  2,
   (name, number, body) => {
     notebox(name, number, body, "注意", _caution, red)
   }
@@ -427,9 +421,8 @@
 
 #let quote = thmenv(
   "quote",
-  "Quote",
   boxcounting,
-  none,
+  2,
   (name, number, body) => {
     notebox(name, number, body, "引用", _quote, eastern)
   }
@@ -437,9 +430,8 @@
 
 #let theorem = thmenv(
   "theorem",
-  "Theorem",
   boxcounting,
-  none,
+  2,
   (name, number, body) => {
     notebox(name, number, body, "定理", _thm, yellow)
   }
@@ -447,9 +439,8 @@
 
 #let proposition = thmenv(
   "proposition",
-  "Proposition",
   boxcounting,
-  none,
+  2,
   (name, number, body) => {
     notebox(name, number, body, "命题", _prop, navy)
   }

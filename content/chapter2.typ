@@ -50,46 +50,18 @@ int main() {
 == 定理环境
 
 
-#definition(
-  "定义",
-)[
-  #lorem(25)
-]
+#definition("定义")[#lorem(30)]
 
-#example(
-  "示例",
-)[
-  #lorem(25)
-]
+#example("示例")[#lorem(30)]
 
-#tip(
-  "提示",
-)[
-  #lorem(25)
-]
+#tip("提示")[#lorem(30)]
 
-#attention(
-  "注意",
-)[
-  #lorem(25)
-]
+#attention("注意")[#lorem(30)]
 
-#quote(
-  "引用",
-)[
-  #lorem(25)
-]
+#quote("引用")[#lorem(30)]
 
-#theorem(
-  "定理",
-)[
-  #lorem(25)
-]
+#theorem("定理")[#lorem(30)]
 
-#proposition(
-  "命题",
-)[
-  #lorem(25)
-]
+#proposition("命题")[#lorem(30)]
 
 #sectionline
