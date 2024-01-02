@@ -52,49 +52,42 @@ int main() {
 
 #definition(
   "定义",
-  footer: "定义"
 )[
   #lorem(25)
 ]
 
 #example(
   "示例",
-  footer: "示例"
 )[
   #lorem(25)
 ]
 
 #tip(
   "提示",
-  footer: "提示"
 )[
   #lorem(25)
 ]
 
 #attention(
   "注意",
-  footer: "注意"
 )[
   #lorem(25)
 ]
 
 #quote(
   "引用",
-  footer: "引用"
 )[
   #lorem(25)
 ]
 
 #theorem(
   "定理",
-  footer: "定理"
 )[
   #lorem(25)
 ]
 
 #proposition(
   "命题",
-  footer: "命题"
 )[
   #lorem(25)
 ]
