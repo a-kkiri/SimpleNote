@@ -4,7 +4,7 @@
 
 == 特殊记号
 
-你可以 Typst 的语法对文本进行特殊标记，我们为如下标记设定了样式：
+你可以 Typst 的语法对文本进行#highlight[特殊标记]，我们为如下标记设定了样式：
 
 #enum(
   [*突出*],
@@ -15,20 +15,31 @@
 
 == 代码
 
-行内代码使用例 `main()`
+行内代码使用例 `#include`，下面是代码块使用例：
 
-#figure(caption: [代码块插入例])[#sourcecode(
+#code(caption: [代码块插入例])[
 ```cpp
 #include <iostream>
 int main() {
   std::cout << "Hello, world!" << std::endl;
 }
 ```
-)] <cpp-example>
+] <cpp-example>
 
 == 图片 <figure>
 
-#figure(caption: [图片插入例], image("../figures/typst.png")) <image-example>
+#figure(caption: [图片插入例])[#image("../figures/typst.png")]<image-example>
+
+== 表格
+
+#figure(caption: [表格插入例])[
+  #table(
+    columns: (1fr, 1fr, 1fr),
+    [表头1]  , [表头2]  , [表头3],
+    [单元格1], [单元格2], [单元格3],
+    [单元格1], [单元格2], [单元格3],
+    [单元格1], [单元格2], [单元格3],
+)]
 
 == 引用块
 

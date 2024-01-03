@@ -26,7 +26,7 @@
   text_font: "Linux Libertine",
   sc_font: "Noto Sans CJK SC",
   code_font: "DejaVu Sans Mono",
-  accent: orange, // 黑色
+  accent: orange, // 主题色
 )
 
 #include "content/chapter1.typ"

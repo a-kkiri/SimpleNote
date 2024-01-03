@@ -70,7 +70,7 @@
   show: thmrules
 
   // 中文粗体，斜体
-  show strong: set text(fill: accent_color.lighten(20%), font: (text_font, sc_font))
+  show strong: set text(fill: accent_color, font: (text_font, sc_font))
   show emph: text.with(font: (text_font, sc_font))
   // set text(cjk-latin-spacing: auto)
 
@@ -94,6 +94,9 @@
       underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) 
     }
   }
+
+  // 文本高亮
+  // set highlight(fill: accent_color.lighten(50%))
 
   // 计数器
   let chaptercounter = counter("chapter")
@@ -202,10 +205,16 @@
     })
   )
 
+  // 配置表格
+  set table(
+    fill: (_, row) => if row == 0 {accent_color.lighten(40%)} else {accent_color.lighten(80%)},
+    stroke: 1pt + white
+  )
+
   // set figure(placement: auto)
   show figure.where(
     kind: table
-  ): set figure.caption(position: top)
+  ): set figure.caption(position: bottom)
   show figure.where(
     kind: raw
   ): it => {
@@ -323,6 +332,11 @@
 
 
 // 函数===========================================================
+
+// 代码块
+#let code(body, caption: none) = {
+  figure(caption: caption)[#sourcecode[#body]]
+}
 
 // 配置块引用
 #let blockquote(cite: none, body) = [
