@@ -43,13 +43,10 @@
   // 参考书目文件路径
   bibliography_file: none,
   // 参考文献引用样式
-  bibstyle: "apa",
+  bibstyle: "gb-7714-2015-numeric",
 
   // 页面尺寸，同时会影响页边距。
   paper_size: "a4",
-
-  // 页面的列数
-  cols: 1,
 
   // 文本和代码的字体
   text_font: "Linux Libertine",
@@ -58,6 +55,10 @@
 
   // 主题颜色，必须是 HEX 颜色.
   accent: "#000000",
+
+  // 封面背景图片和正文背景颜色
+  cover_image: none,
+  background_color: none,
 
   // 笔记内容
   body
@@ -105,11 +106,23 @@
   // 配置页面
   set page(
     paper: paper_size,
-    columns: cols,
     numbering: "1 / 1",
     number-align: center,
     // 页边距
     margin: (x:1.6cm, y:2.3cm),
+
+    // 封面背景图片
+    background: locate(loc => {
+      if loc.page() == 1 and cover_image != none {
+        layout(size => {
+          image(cover_image, height: size.height)
+        })
+      } else if background_color != none{
+        layout(size => {
+          block(width:100%, height:100%, fill: rgb(background_color))
+        })
+      }
+    }),
 
     header: locate(loc => {
       if loc.page() == 1{return}

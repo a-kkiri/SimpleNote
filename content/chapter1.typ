@@ -2,7 +2,7 @@
 
 = 模板说明
 
-#link("https://github.com/a-kkiri/SimpleNote")[SimpleNote] #cite(<SimpleNote>) 修改自 #link("https://github.com/jskherman/jsk-lecnotes")[jsk-lecnotes]，是一个简单的 Typst 模板。本模板主要适用于编写课程笔记，默认页边距为2.5cm，中文字体为 Noto Sans CJK SC，英文字体为 Linux Libertine，字号为12pt（小四）。
+#link("https://github.com/a-kkiri/SimpleNote")[SimpleNote] #cite(<SimpleNote>) 修改自 #link("https://github.com/jskherman/jsk-lecnotes")[jsk-lecnotes]，是一个简单的 Typst 模板。本模板主要适用于编写课程笔记，默认页边距为2.5cm，中文字体为 Noto Sans CJK SC，英文字体为 Linux Libertine，字号为12pt（小四）。封面图片来自于 #link("https://unsplash.com/photos/a-lone-tree-in-the-middle-of-a-snowy-field-e6izyojjM1s")[illes_cristi - Unsplash]。
 
 默认模板文件由主要以下六部分组成：
 
