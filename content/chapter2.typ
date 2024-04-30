@@ -15,16 +15,17 @@
 
 == 代码
 
-行内代码使用例 `#include`，下面是代码块使用例：
+行内代码使用例 `println!("Hello, typst!")`，下面是代码块使用例：
 
-#code(caption: [代码块插入例])[
-```cpp
-#include <iostream>
-int main() {
-  std::cout << "Hello, world!" << std::endl;
+#figure(
+```rust
+fn main() {
+    println!("Hello, typst!");
 }
-```
-] <cpp-example>
+```,
+
+caption: [代码块插入例]
+) <cpp-example>
 
 == 图片 <figure>
 
@@ -53,9 +54,13 @@ int main() {
 
 == 公式
 
-使用 `#mi('LaTeX equation')` 编写行内公式 #mi(`e^{ix} = \cos x + i \sin x`)
+行内公式，例如 $integral_123^123a+b+c$ $a^2 + b^2 = c^2$。行内公式使用 `$$` 包裹，公式和两端的 `$$` 之间没有空格$$。
 
-使用 `#mitex('LaTeX equation')` 编写行间公式：#mitex(`e^{ix} = cos x + i sin x`)
+行间公式，例如：$ integral.triple_(Omega)\(frac(diff P, diff x) + frac(diff Q, diff y) + frac(diff R, diff z)\)d v = integral.surf_(Sigma)P d y d z + Q d z d x + R d x d y $<eq> @eq 是高斯公式。行间公式使用 `$$` 环境包裹，公式和两端的 `$$` 之间至少有一个空格。
+
+以上仅为一些简单的公式示例，更多的公式使用方法可以查看 #link("https://typst.app/docs/reference/math/")[typst/docs/math]
+
+另外，如果需要插入 LaTeX 公式可以使用外部包 #link("https://typst.app/universe/package/mitex")[mitex]。
 
 
 == 定理环境
