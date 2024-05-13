@@ -21,7 +21,7 @@ SimpleNote 是为撰写简易课程笔记而设计的 Typst 模板，修改自 [
 
 使用模板首先需配置 `main.typ`，设置标题、描述、作者等信息，如需要进一步更改文档格式，请修改 `template.typ`。撰写文档请修改 `/content` 文件夹内的文件。
 
-本地编辑建议使用 VSCode 编辑器，并推荐安装 [Tinymist](https://marketplace.visualstudio.com/items?itemName=nvarner.typst-lsp) 与 [Typst Preview](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview) 插件。
+本地编辑建议使用 VSCode 编辑器，并推荐安装 [Tinymist](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview) 与 [Typst Preview](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview) 插件。
 
 ## 模板预览
 
@@ -36,6 +36,11 @@ SimpleNote 是为撰写简易课程笔记而设计的 Typst 模板，修改自 [
 > 例如，假设你在项目根目录下有一个 `./content/chapter.typ` 文件和一个 `./template.typ` 文件，那么你需要在 `chapter.typ` 文件顶部添加 `#import "../template.typ": *`。
 
 ## 更改记录
+
+2024-5-13
+- 修复页眉章节标题显示问题
+- 修复公式编号记数问题
+- 调整定理环境标题显示位置
 
 2024-4-30
 - 更新 typst 包

@@ -103,11 +103,13 @@
 
       let elems = query(heading.where(level: 1).after(loc))
 
-      let chapter-title = elems.first().body
+      let chapter-title = ""
 
-      if(elems.first().location().page() != loc.page()){
-          let elems = query(heading.where(level: 1).before(loc))
-          chapter-title = elems.last().body
+      if(elems == () or elems.first().location().page() != loc.page()){
+        let elems = query(heading.where(level: 1).before(loc))
+        chapter-title = elems.last().body
+      }else{
+        chapter-title = elems.first().body
       }
       
       let head-title = text()[
@@ -159,6 +161,7 @@
 
     #if it.level == 1 and it.numbering != none{
       chaptercounter.step()
+      counter(math.equation).update(0)
     }
   ]
 
@@ -371,7 +374,7 @@
       thickness: (left: 4pt),
       radius: 4pt
     ),
-    title: [#name #h(1fr) #box(height: 0.85em)[#image.decode(nicon)] #ntype #number],
+    title: [#box(height: 0.85em)[#image.decode(nicon)] #name #h(1fr) #ntype #number],
     body
   )
 }
