@@ -90,54 +90,59 @@
     margin: (x:1.6cm, y:2.3cm),
 
     // 封面图片和背景图片
-    background: locate(loc => {
-      if loc.page() == 1 and cover-image != none {
+    background: context {
+      if here().page() == 1 and cover-image != none {
         block(width:100%, height: 100%)[#image(cover-image, width: 100%, height: 100%)]
       } else if background-color != none{
         block(width:100%, height:100%, fill: rgb(background-color))
       }
-    }),
+    },
 
-    header: locate(loc => {
-      if loc.page() == 1{return}
+header: context {
+    if here().page() == 1 {
+      return
+    }
 
-      let elems = query(heading.where(level: 1).after(loc))
+    let elems = query(heading.where(level: 1).after(here()))
 
-      let chapter-title = ""
+    let chapter-title = ""
 
-      if(elems == () or elems.first().location().page() != loc.page()){
-        let elems = query(heading.where(level: 1).before(loc))
-        chapter-title = elems.last().body
-      }else{
-        chapter-title = elems.first().body
+    if (elems == () or elems.first().location().page() != here().page()) {
+      let elems = query(heading.where(level: 1).before(here()))
+      chapter-title = elems.last().body
+    } else {
+      chapter-title = elems.first().body
+    }
+
+    let head-title = text()[
+      #if short-title != none {
+        short-title
+      } else {
+        title
       }
-      
-      let head-title = text()[
-        #if short-title != none {short-title} else {title}
-      ]
-      
-      if calc.even(loc.page()) == true {
-        emph(chapter-title) + h(1fr) + emph(head-title)
-      }else{
-        emph(head-title) + h(1fr) + emph(chapter-title)
-      }
-      
-      v(-8pt)
-      align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
-      
-    }),
+    ]
 
-    footer: locate(loc => {
-      if loc.page() == 1 {return}
+    if calc.even(here().page()) == true {
+      emph(chapter-title) + h(1fr) + emph(head-title)
+    } else {
+      emph(head-title) + h(1fr) + emph(chapter-title)
+    }
+
+    v(-8pt)
+    align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
+
+  },
+
+    footer: context {
+      if here().page() == 1 {return}
       [
-        #if calc.even(loc.page()) == true {
+        #if calc.even(here().page()) == true {
             align(left)[#counter(page).display("1 / 1",both: true,)]
         }else{
             align(right)[#counter(page).display("1 / 1",both: true,)]
         }
       ]
     })
-  )
 
   // 配置列表
   set list(tight: true, indent: 2em)
@@ -178,12 +183,13 @@
   ]
 
   // 配置公式的编号和间距
-  set math.equation(
-    numbering: (..nums) => locate(loc => {
-      numbering("(1.1)", chaptercounter.at(loc).first(), ..nums)
-    })
-  )
-  
+  set math.equation(numbering: (..nums) => (
+    context {
+      numbering("(1.1)", chaptercounter.at(here()).first(), ..nums)
+    }
+  ))
+
+
   show math.equation: eq => {
     set block(spacing: 0.65em)
     eq
@@ -191,10 +197,10 @@
 
   // 配置图像和图像编号
   set figure(
-    numbering: (..nums) => locate(loc => {
-      numbering("1.1", chaptercounter.at(loc).first(), ..nums)
+    numbering: (..nums) => context {
+      numbering("1.1", chaptercounter.at(here()).first(), ..nums)
     })
-  )
+
 
   // 配置表格
   set table(
