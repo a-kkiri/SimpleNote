@@ -323,7 +323,7 @@ header: context {
   if bibliography-file != none {
     pagebreak()
     show bibliography: set text(10.5pt)
-    bibliography(bibliography-file, title: "参考文献", style: "gb-7714-2015-numeric")
+    bibliography(bibliography-file, title: "参考文献", style: bibstyle) // apply bibstyle here.
   }
 }
 
