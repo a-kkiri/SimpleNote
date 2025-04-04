@@ -1,6 +1,6 @@
-#import "@preview/showybox:2.0.1": showybox
-#import "@preview/codelst:2.0.1": sourcecode
-#import "@preview/ctheorems:1.1.2": *
+#import "@preview/showybox:2.0.4": showybox
+#import "@preview/codelst:2.0.2": sourcecode
+#import "@preview/ctheorems:1.1.3": *
 #import "resource.typ": *
 
 /*
