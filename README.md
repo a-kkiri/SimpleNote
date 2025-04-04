@@ -37,6 +37,13 @@ SimpleNote 是为撰写简易课程笔记而设计的 Typst 模板，修改自 [
 
 ## 更改记录
 
+2025-4-4（PR from MicroBlueee & vectorpikachu）
+- 修复 template.typ 没有应用 bibstyle
+- 更新 typst 包
+    - showybox: 2.0.1 ——> 2.0.4
+    - codelst: 2.0.1 ——> 2.0.2
+    - ctheorems: 1.1.2 ——> 1.1.3
+
 2024-5-13
 - 修复页眉章节标题显示问题
 - 修复公式编号记数问题
